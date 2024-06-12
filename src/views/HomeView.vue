@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useProductsStore } from '../stores/products'
+import Error from '../components/Error.vue'
 
 const products = useProductsStore()
 const search = ref('')
 const empty = ref(false)
-
 const searchFunc = async () => {
   await products.fetch(search.value)
   products.products.length == 0 ? (empty.value = true) : (empty.value = false)
@@ -83,11 +83,8 @@ const searchFunc = async () => {
         </div>
       </div>
     </div>
-    <div v-if="products.fetchError" class="toast m-[30px]">
-      <div class="errorActive alert bg-[red] border-[red] text-white">
-        <span>Не удалось загрузить книгу</span>
-      </div>
-    </div>
+
+    <Error errorText="Не удалось загрузить книгу 😥" v-if="products.fetchError" />
   </main>
 </template>
 

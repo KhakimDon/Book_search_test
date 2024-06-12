@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import NeuralNetwork from '../components/NeuralNetwork.vue'
+import Error from '../components/Error.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -8,6 +9,7 @@ const token = ref('')
 const loading = ref(false)
 const tokenError = ref(false)
 const error = ref('')
+const showError = ref(false)
 
 async function submitForm() {
   loading.value = true
@@ -23,6 +25,8 @@ async function submitForm() {
       error.value = 'Неправильный токен. Пожалуйста, введите токен снова.'
       token.value = ''
       loading.value = false
+      showError.value = true
+      setTimeout(() => (showError.value = false), 2000)
     }
   }, 3000)
 }
@@ -72,11 +76,7 @@ async function submitForm() {
           <div class="error mt-[5px]">{{ error }}</div>
         </div>
       </div>
-      <div v-if="error" class="error toast mb-[20px] mr-[20px]">
-        <div class="alert flex items-center bg-[red] alert-info w-[500px] h-[70px]">
-          <span class="text-[17px] text-white">{{ error }}</span>
-        </div>
-      </div>
+      <Error :errorText="error" v-if="showError" />
     </section>
   </main>
 </template>

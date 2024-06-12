@@ -56,6 +56,7 @@ onMounted(async () => {
             </ul>
           </div>
         </div>
+
         <div class="flex flex-col w-[100%]">
           <span class="font-[600]">Название книги:</span>
           <div
@@ -85,69 +86,52 @@ onMounted(async () => {
           <div v-if="!loading" class="flex gap-[50px] justify-between w-[100%] mt-[10px] border-t">
             <div class="mt-[10px] flex flex-col items-center">
               <p class="font-[600]">Cтраниц:</p>
-              <span class="text-[white]">123123</span>
+              <span v-if="products.book.volumeInfo.pageCount" class="text-[white]">{{
+                products.book.volumeInfo.pageCount
+              }}</span>
+              <span v-else class="text-[white]">Неизвестно</span>
             </div>
             <div class="mt-[10px] flex flex-col items-center">
               <p class="font-[600]">Опубликовано:</p>
-              <span class="text-[white]">23.22.2022</span>
+              <span v-if="products.book.volumeInfo.publishedDate" class="text-[white]">{{
+                products.book.volumeInfo.publishedDate
+              }}</span>
+              <span v-else class="text-[white]">Неизвестно</span>
             </div>
             <div class="mt-[10px] items-center flex flex-col">
-              <span>Рейтинг (10)</span>
+              <span
+                >Рейтинг
+                <span v-if="products.book.volumeInfo.averageRating"
+                  >({{ products.book.volumeInfo.ratingsCount }})</span
+                ></span
+              >
 
-              <div class="rating rating-md rating-half">
+              <div
+                v-if="products.book.volumeInfo.averageRating"
+                class="rating rating-md rating-half"
+              >
+                <!-- "averageRating": 5, -->
+                <!-- "ratingsCount": 1, -->
                 <input type="radio" name="rating-10" class="rating-hidden" />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-1"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-2"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-1"
-                  checked
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-2"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-1"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-2"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-1"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-2"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-1"
-                />
-                <input
-                  type="radio"
-                  name="rating-10"
-                  class="bg-orange-500 mask mask-star-2 mask-half-2"
-                />
+                <div
+                  v-for="input of Math.round(products.book.volumeInfo.averageRating)"
+                  :key="input.key"
+                >
+                  <input
+                    disabled
+                    type="radio"
+                    name="rating-10"
+                    class="bg-orange-500 mask mask-star-2 mask-half-1"
+                  />
+                  <input
+                    disabled
+                    type="radio"
+                    name="rating-10"
+                    class="bg-orange-500 mask mask-star-2 mask-half-2"
+                  />
+                </div>
               </div>
+              <span class="text-white" v-else>Неизвестно</span>
             </div>
           </div>
         </div>
