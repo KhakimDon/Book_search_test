@@ -6,6 +6,14 @@ export default {
   ],
   theme: {
     extend: {},
+    screens:{
+      '2xl': {'max': '1920px'},
+      'xl': {'max': '1200px'},
+      'x': {'max': '900px'},
+      'm': {'max': '768px'},
+      's': {'max': '500px'},
+      
+    }
   },
   plugins: [require('daisyui')],
 }

@@ -33,24 +33,32 @@ async function submitForm() {
 </script>
 
 <template>
-  <main>
+  <main class="s:overflow-y-auto">
     <NeuralNetwork />
-    <section class="h-[100vh] flex items-center">
-      <div class="h-[400px] w-[100%] max-w-[1200px] mx-auto">
-        <h1 class="text-[36px] drop-shadow-xl text-white text-center font-[1000]">
+    <section class="h-[100vh] s:h-[600px] s:flex-col x:h-[initial] x:pt-[90px] flex items-center">
+      <div class="h-[400px] w-[100%] xl:max-w-[90%] max-w-[1200px] mx-auto">
+        <h1
+          class="text-[36px] s:text-[22px] s:text-left s:leading-[28px] m:text-[23px] x:text-[28px] drop-shadow-xl text-white text-center font-[1000]"
+        >
           Добро пожаловать на наш сайт для поиска книг! Независимо от вашего вкуса или интересов, мы
           поможем вам найти идеальную книгу. Используйте наш удобный поиск, чтобы открывать новые
           миры и находить вдохновение на каждой странице.
         </h1>
 
         <div
-          class="glass mx-auto max-w-[650px] p-[30px] min-h-[150px] pb-[40px] z-[999] sticky bottom-0 mt-[30px]"
+          class="glass mx-auto max-w-[650px] x:max-w-[100%] p-[30px] s:p-[13px] min-h-[150px] pb-[40px] z-[999] sticky bottom-0 mt-[30px]"
         >
-          <label for="tokenInput" class="text-[25px] text-white font-[arial] font-[600]">
+          <label
+            for="tokenInput"
+            class="text-[25px] m:text-[17px] x:text-[20px] text-white font-[arial] font-[600]"
+          >
             Введите ваш 16-значный имя пользователя.
           </label>
           <label class="mt-[20px] gap-[20px] input-bordered flex items-center gap-2">
-            <form @submit.prevent="submitForm" class="flex gap-[20px] justify-between w-[100%]">
+            <form
+              @submit.prevent="submitForm"
+              class="flex s:flex-col gap-[20px] justify-between w-[100%]"
+            >
               <input
                 class="block w-[100%] placeholder:font-[400] font-[1000] px-[20px] rounded-[8px] h-[50px] outline-none"
                 id="tokenInput"
@@ -65,7 +73,7 @@ async function submitForm() {
                 required
               />
               <button
-                class="btn w-[120px] bg-[orangered] text-white border h-[50px] rounded-[8px] px-[40px]"
+                class="btn s:w-[100%] w-[120px] bg-[orangered] text-white border h-[50px] rounded-[8px] px-[40px]"
                 type="submit"
               >
                 <span class="loading loading-dots loading-xs" v-if="loading"></span>
@@ -73,7 +81,7 @@ async function submitForm() {
               </button>
             </form>
           </label>
-          <div class="error mt-[5px]">{{ error }}</div>
+          <div class="error mt-[5px] s:text-[13px]">{{ error }}</div>
         </div>
       </div>
       <Error :errorText="error" v-if="showError" />

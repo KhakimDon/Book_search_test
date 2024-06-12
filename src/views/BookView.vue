@@ -24,9 +24,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="pt-[100px] min-h-[200px] overflow-y-auto h-[100vh] pb-[100px]">
-    <div class="min-h-[200px] w-[100%] max-w-[800px] w-[100%] mx-auto">
-      <div class="flex gap-[20px] w-[100%]">
+  <main class="pt-[100px] x:pt-[130px] min-h-[200px] overflow-y-auto h-[100vh] pb-[100px]">
+    <div class="min-h-[200px] w-[100%] x:max-w-[95%] max-w-[800px] w-[100%] mx-auto">
+      <div class="flex gap-[20px] x:flex-col x:items-center w-[100%]">
         <div class="min-w-[max-content]">
           <img
             v-if="!loading && products.book.volumeInfo.imageLinks"
@@ -68,7 +68,7 @@ onMounted(async () => {
           <span class="font-[600]">Название книги:</span>
           <div
             v-if="!loading && products.book.volumeInfo"
-            class="text-[20px] gap-[20px] flex justify-between mb-[20px] font-[1000] leading-[27px] text-[white]"
+            class="text-[20px] x:flex-col x:items-left gap-[20px] flex justify-between mb-[20px] font-[1000] leading-[27px] text-[white]"
           >
             <span>{{ products.book.volumeInfo.title }}</span>
             <a
@@ -97,7 +97,10 @@ onMounted(async () => {
           <div v-if="loading" class="skeleton h-[22px] mt-[5px] w-[100%] mb-[5px]"></div>
           <div v-if="loading" class="skeleton h-[22px] mt-[5px] w-[100%] mb-[5px]"></div>
           <div v-if="loading" class="skeleton h-[22px] mt-[5px] w-[100%] mb-[5px]"></div>
-          <div v-if="!loading" class="flex gap-[50px] justify-between w-[100%] mt-[10px] border-t">
+          <div
+            v-if="!loading"
+            class="flex x:flex-col x:gap-[10px] gap-[50px] justify-between w-[100%] mt-[10px] border-t"
+          >
             <div class="mt-[10px] flex flex-col items-center">
               <p class="font-[600]">Cтраниц:</p>
               <span v-if="products.book.volumeInfo.pageCount" class="text-[white]">{{
@@ -153,14 +156,14 @@ onMounted(async () => {
 
       <div id="preview" v-if="products.book.volumeInfo && products.book.volumeInfo.previewLink">
         <h3 class="text-[26px] pb-[10px] font-[1000] text-white pt-[90px]">Прочитать</h3>
-        <div class="min-h-[500px] w-[100%] border-[1px]">
+        <div class="min-h-[500px] x:min-h-[400px] w-[100%] border-[1px]">
           <iframe
             ref="frame"
             frameborder="0"
             scrolling="no"
             style="border: 0px"
             :src="`https://books.google.co.uz/books?id=${products.book.id}&lpg=PP1&dq=${products.book.id}=ru&pg=PP1&output=embed`"
-            class="w-[100%] h-[500px]"
+            class="w-[100%] h-[500px] x:h-[400px]"
           ></iframe>
         </div>
       </div>

@@ -13,7 +13,7 @@ onMounted(() => {
 <template>
   <div
     :class="{ errorToTop: errorToTop, errorOut: errorOut }"
-    class="fixed z-[9999] duration-[1s] right-[20px] rounded-[10px] bottom-[-100%] flex items-center bg-[red] alert-info px-[30px] h-[70px]"
+    class="fixed z-[9999] s:max-w-[90%] duration-[1s] right-[20px] rounded-[10px] bottom-[-100%] flex items-center bg-[red] alert-info px-[30px] h-[70px]"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ onMounted(() => {
       />
     </svg>
 
-    <span class="text-[17px] text-white">{{ props.errorText }}</span>
+    <span class="text-[17px] s:text-[14px] text-white">{{ props.errorText }}</span>
   </div>
 </template>
 

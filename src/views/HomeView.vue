@@ -14,9 +14,14 @@ const searchFunc = async () => {
 
 <template>
   <main class="overflow-y-auto h-[100vh]">
-    <div class="min-h-[250px] pt-[120px] max-w-[1200px] mx-auto">
-      <h2 class="text-[37px] font-[1000] text-center text-white">Удачи в поисках любимой книги.</h2>
-      <form @submit.prevent="searchFunc" class="flex max-w-[700px] mx-auto gap-[20px] mt-[10px]">
+    <div class="min-h-[250px] pt-[120px] max-w-[1200px] m:max-w-[100%] m:w-[100%] mx-auto">
+      <h2 class="text-[37px] font-[1000] m:text-[26px] text-center text-white">
+        Удачи в поисках любимой книги.
+      </h2>
+      <form
+        @submit.prevent="searchFunc"
+        class="flex max-w-[700px] m:max-w-[90%] m:flex-col m:gap-[5px] mx-auto gap-[20px] mt-[10px]"
+      >
         <input
           v-model="search"
           type="text"
@@ -26,6 +31,7 @@ const searchFunc = async () => {
         <button class="btn bg-[orangered] text-white">Поиск</button>
       </form>
     </div>
+
     <div class="min-h-[300px] mb-[200px] h-[100vh] max-w-[1200px] mx-auto">
       <div v-if="products.products" class="overflow-x-auto max-w-[700px] mx-auto">
         <table v-if="products.products.length > 0" class="table h-[initial]">
