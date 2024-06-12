@@ -7,12 +7,21 @@ const router = useRouter()
 const products = useProductsStore()
 const loading = ref(true)
 
+const frame = ref()
+const loaded = ref(false)
+
 onMounted(async () => {
   await products.bookFetch(router.currentRoute._rawValue.params.id)
   if (products.book.id == undefined) {
     products.error()
     router.push('/')
   } else loading.value = false
+
+  if (products.book.volumeInfo && products.book.volumeInfo.previewLink) {
+    frame.value.onload = () => {
+      loaded.value = true
+    }
+  }
 })
 </script>
 
@@ -61,9 +70,16 @@ onMounted(async () => {
           <span class="font-[600]">Название книги:</span>
           <div
             v-if="!loading && products.book.volumeInfo"
-            class="text-[20px] mb-[20px] font-[1000] leading-[27px] text-[white]"
+            class="text-[20px] flex justify-between mb-[20px] font-[1000] leading-[27px] text-[white]"
           >
-            {{ products.book.volumeInfo.title }}
+            <span>{{ products.book.volumeInfo.title }}</span>
+            <a
+              href="#preview"
+              v-if="products.book.volumeInfo && products.book.volumeInfo.previewLink"
+              class="btn bg-[orangered] text-white border-[orangered]"
+            >
+              Читать Бесплатно !
+            </a>
           </div>
 
           <div v-if="loading" class="skeleton h-[22px] mt-[5px] w-28 mb-[20px]"></div>
@@ -137,10 +153,26 @@ onMounted(async () => {
         </div>
       </div>
 
+      <div id="preview" v-if="products.book.volumeInfo && products.book.volumeInfo.previewLink">
+        <h3 class="text-[26px] pb-[10px] font-[1000] text-white pt-[90px]">Прочитать</h3>
+        <div class="min-h-[500px] w-[100%] border-[1px]">
+          <iframe
+            ref="frame"
+            frameborder="0"
+            scrolling="no"
+            style="border: 0px"
+            :src="`https://books.google.co.uz/books?id=${products.book.id}&lpg=PP1&dq=${products.book.id}=ru&pg=PP1&output=embed`"
+            class="w-[100%] h-[500px]"
+          ></iframe>
+        </div>
+      </div>
       <!-- averageRating -->
     </div>
   </main>
 </template>
 
 <style scoped>
+* {
+  scroll-behavior: smooth;
+}
 </style>
