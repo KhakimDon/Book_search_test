@@ -3,10 +3,8 @@ import { onMounted, ref } from 'vue'
 import { useProductsStore } from '../stores/products'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-
 const products = useProductsStore()
 const loading = ref(true)
-
 const frame = ref()
 const loaded = ref(false)
 
@@ -70,7 +68,7 @@ onMounted(async () => {
           <span class="font-[600]">Название книги:</span>
           <div
             v-if="!loading && products.book.volumeInfo"
-            class="text-[20px] flex justify-between mb-[20px] font-[1000] leading-[27px] text-[white]"
+            class="text-[20px] gap-[20px] flex justify-between mb-[20px] font-[1000] leading-[27px] text-[white]"
           >
             <span>{{ products.book.volumeInfo.title }}</span>
             <a
